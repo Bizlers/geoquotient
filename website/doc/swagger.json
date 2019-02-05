@@ -1,0 +1,324 @@
+{
+  "openapi" : "3.0.0",
+  "servers" : [ {
+    "description" : "SwaggerHub API Auto Mocking",
+    "url" : "https://virtserver.swaggerhub.com/Bizlers/geoquotient/1.0.0"
+  }, {
+    "description" : "Test GeoQuotient Server",
+    "url" : "https://geoquotient.bizlers.com/Bizlers/geoquotient/1.0.0"
+  } ],
+  "info" : {
+    "description" : "GeoQuotient is a suite of production ready geospatial webservices. The following documentation will contain API documentation for Geo Discovery Service, Geo Tracking Service and Geo Information Service.",
+    "version" : "1.0.0",
+    "title" : "GeoQuotient Services API",
+    "contact" : {
+      "email" : "contact@bizlers.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "tags" : [ {
+    "name" : "GTS",
+    "description" : "Geo Tracking Service"
+  }, {
+    "name" : "GDS",
+    "description" : "Geo Discovery Service"
+  } ],
+  "paths" : {
+    "/gds/resources/{resourceId}" : {
+      "put" : {
+        "tags" : [ "GDS" ],
+        "summary" : "adds or updates location of the resource",
+        "operationId" : "updateResourceLocation",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "resourceId",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/GeoLocation"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Location update successful."
+          },
+          "201" : {
+            "description" : "Location update successful. New resource created"
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      },
+      "get" : {
+        "tags" : [ "GDS" ],
+        "summary" : "return resource",
+        "operationId" : "getResource",
+        "description" : "The service returns the resources for the provided resourceId in the path\n",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "resourceId",
+          "description" : "Id of the resource",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Resource entity",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Resource"
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "The resource specified by the resourceId not found."
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      }
+    },
+    "/gds/resources" : {
+      "get" : {
+        "tags" : [ "GDS" ],
+        "summary" : "returns a list of the resources around the queried latitude and longitude",
+        "operationId" : "getNearbyResources",
+        "description" : "The service looks up the resources with provided latitude and longitude and returns list of the resources which falls in visinity provided by the radius\n",
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "latitude",
+          "description" : "latitude of the location",
+          "required" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "in" : "query",
+          "name" : "longitude",
+          "description" : "longitude of the location",
+          "required" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "in" : "query",
+          "name" : "radius",
+          "description" : "radius in meters",
+          "required" : false,
+          "schema" : {
+            "type" : "number"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "List of resources",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Resource"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      }
+    },
+    "/gts/resources/{resourceId}" : {
+      "get" : {
+        "tags" : [ "GTS" ],
+        "summary" : "get the resource",
+        "operationId" : "getResourceLocation",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "resourceId",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Resource Entity",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Resource"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "GTS" ],
+        "summary" : "adds or updates location of the resource",
+        "operationId" : "updateResourceLocation",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "resourceId",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/GeoLocation"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Location update successful."
+          },
+          "201" : {
+            "description" : "Location update successful. New resource created"
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      }
+    },
+    "/gts/trips" : {
+      "post" : {
+        "tags" : [ "GTS" ],
+        "summary" : "Adds a new trip",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Trip"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "New trip created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "id" : {
+                      "type" : "integer",
+                      "format" : "int64",
+                      "description" : "ID of the created trip."
+                    }
+                  }
+                }
+              }
+            },
+            "links" : {
+              "GetTripByTripId" : {
+                "operationRef" : "#/paths/~trips~1{tripId}/get",
+                "parameters" : {
+                  "tripId" : "$response.body#/id"
+                },
+                "description" : "The `id` value returned in the response can be used as the `tripId` parameter in `GET /trips/{tripId}`.\n"
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad input parameter"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Resource" : {
+        "type" : "object",
+        "required" : [ "id", "geoLocation" ],
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "geoLocation" : {
+            "$ref" : "#/components/schemas/GeoLocation"
+          }
+        }
+      },
+      "GeoLocation" : {
+        "required" : [ "name" ],
+        "properties" : {
+          "accuracy" : {
+            "type" : "number",
+            "description" : "accuracy in meters",
+            "example" : 20
+          },
+          "latitude" : {
+            "type" : "number",
+            "example" : 18.5021036
+          },
+          "longitude" : {
+            "type" : "number",
+            "example" : 73.8094334
+          },
+          "time" : {
+            "type" : "number",
+            "description" : "time in milliseconds since epoch",
+            "example" : 1540204818930
+          }
+        },
+        "type" : "object"
+      },
+      "Trip" : {
+        "properties" : {
+          "startDate" : {
+            "type" : "number",
+            "description" : "time in milliseconds since epoch",
+            "example" : 1540204818930
+          },
+          "stopDate" : {
+            "type" : "number",
+            "description" : "time in milliseconds since epoch",
+            "example" : 1540204818930
+          },
+          "state" : {
+            "type" : "number"
+          },
+          "resource" : {
+            "$ref" : "#/components/schemas/Resource"
+          }
+        }
+      }
+    }
+  }
+}
