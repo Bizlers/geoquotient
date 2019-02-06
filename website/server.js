@@ -4,5 +4,9 @@ var express = require('express'),
     swaggerDocument = require('./doc/swagger.json');
 var app = express();
 app.use(serveStatic('public', {'index': ['index.html']}))
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+var options = {
+  customCss: '.swagger-ui .topbar { display: none }',
+  customSiteTitle: 'GeoQuotient API'
+};
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 app.listen(parseInt(process.argv.slice(2)));
