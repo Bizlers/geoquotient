@@ -1,3 +1,5 @@
 rootProject.name = 'geoquotient'
 include 'geo-discovery'
+include 'website'
+include 'geo-utils'
 
