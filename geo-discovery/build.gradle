@@ -1,3 +1,7 @@
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.ZoneId
+
 buildscript {
     repositories {
         mavenCentral()
@@ -21,6 +25,63 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+}
+
+allprojects {
+    Properties gradleProperties = new Properties()
+    File parent = getRootDir();
+    gradleProperties.load(new FileInputStream(parent.absolutePath + "/version.properties"))
+
+    group = "com.bizlers.geoq"
+    version = gradleProperties['rootVersion']
+
+    ext {
+        buildNumber = !project.hasProperty("BUILD_NUMBER") ? 1 : project["BUILD_NUMBER"]
+        buildTime = !project.hasProperty("build.time") ? new Date().format('yyyyMMddHHmmss') : project["build.time"]
+        buildEnv = !project.hasProperty("build.env") ? "DEVELOP" : project["build.env"]
+    }
+}
+
+description = """Geo Discovery Server"""
+mainClassName = "com.bizlers.geoq.discovery.GeoDiscoveryServer"
+
+jar {
+    enabled = true
+    classifier = 'boot'
+    baseName = 'geo-discovery-server'
+    version =  project.version
+
+    manifest {
+        attributes 'Specification-Title': project.description
+        attributes 'Specification-Version': project.version
+        attributes 'Implementation-Version': buildNumber
+        attributes 'Build-Time': buildTime
+        attributes 'Build-Environment': buildEnv
+    }
+}
+
+bootJar {
+    enabled = false
+}
+
+springBoot {
+    buildInfo {
+        properties {
+            time = LocalDateTime.parse(buildTime, DateTimeFormatter.ofPattern("yyyyMMddHHmmss", Locale.US))
+                    .atZone(ZoneId.of("Asia/Kolkata")).toInstant()
+            additional = [
+                    'build.number': buildNumber
+            ]
+        }
+    }
+}
+
+checkstyle {
+    toolVersion "8.19"
+}
+
+checkstyleMain {
+    configFile = file("$rootProject.projectDir/config/checkstyle/checkstyle.xml")
 }
 
 dependencies {
