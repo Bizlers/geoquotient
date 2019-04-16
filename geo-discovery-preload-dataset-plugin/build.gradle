@@ -16,8 +16,8 @@ jar {
     enabled = true
 
     manifest {
-        attributes 'Plugin-Id': 'hello-plugin'
-        attributes 'Plugin-Class': 'com.bizlers.geoq.discovery.plugins.hello.PreloadServiceDataPlugin'
+        attributes 'Plugin-Id': 'preload-plugin'
+        attributes 'Plugin-Class': 'com.bizlers.geoq.discovery.plugins.PreloadDataPlugin'
         attributes 'Plugin-Version': version
         attributes 'Plugin-Provider': 'Pawan Dalal'
         //attributes 'Plugin-Dependencies': buildEnv

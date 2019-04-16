@@ -1,4 +1,4 @@
-package com.bizlers.geoq.discovery.plugins.hello;
+package com.bizlers.geoq.discovery.plugins;
 
 import com.bizlers.geoq.discovery.plugin.GeoDiscoveryServiceInitializer;
 import com.bizlers.geoq.discovery.plugin.ResourceLocationUpdater;
@@ -8,24 +8,24 @@ import org.pf4j.Plugin;
 import org.pf4j.PluginWrapper;
 import org.pf4j.RuntimeMode;
 
-public class PreloadServiceDataPlugin extends Plugin {
+public class PreloadDataPlugin extends Plugin {
 
-	public PreloadServiceDataPlugin(PluginWrapper wrapper) {
+	public PreloadDataPlugin(PluginWrapper wrapper) {
 		super(wrapper);
 	}
 
 	@Override
 	public void start() {
-		System.out.println("PreloadServiceDataPlugin.start()");
+		System.out.println("PreloadDataPlugin.start()");
 		// for testing the development mode
 		if (RuntimeMode.DEVELOPMENT.equals(wrapper.getRuntimeMode())) {
-			System.out.println(StringUtils.upperCase("PreloadServiceDataPlugin"));
+			System.out.println(StringUtils.upperCase("PreloadDataPlugin"));
 		}
 	}
 
 	@Override
 	public void stop() {
-		System.out.println("PreloadServiceDataPlugin.stop()");
+		System.out.println("PreloadDataPlugin.stop()");
 	}
 
 	@Extension
