@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group 'com.bizlers.geoquotient'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+jar {
+    enabled = true
+
+    manifest {
+        attributes 'Plugin-Id': 'hello-plugin'
+        attributes 'Plugin-Class': 'com.bizlers.geoq.discovery.plugins.hello.PreloadServiceDataPlugin'
+        attributes 'Plugin-Version': version
+        attributes 'Plugin-Provider': 'Pawan Dalal'
+        //attributes 'Plugin-Dependencies': buildEnv
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    compile("org.pf4j:pf4j-spring:0.5.0")
+    compile project(":geo-discovery-api")
+}

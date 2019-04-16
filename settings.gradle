@@ -2,4 +2,6 @@ rootProject.name = 'geoquotient'
 include 'geo-discovery'
 include 'website'
 include 'geo-utils'
+include 'geo-discovery-api'
+include 'geo-discovery-preload-dataset-plugin'
 

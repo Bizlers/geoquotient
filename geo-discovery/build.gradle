@@ -24,6 +24,7 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -44,6 +45,9 @@ allprojects {
 
 description = """Geo Discovery Server"""
 mainClassName = "com.bizlers.geoq.discovery.GeoDiscoveryServer"
+
+ext.pluginsDir = sourceSets.main.resources.srcDirs[0].path.concat("/plugins")
+println "Plugins directory: " + pluginsDir
 
 jar {
     enabled = true
@@ -84,6 +88,17 @@ checkstyleMain {
     configFile = file("$rootProject.projectDir/config/checkstyle/checkstyle.xml")
 }
 
+task assemblePlugins {
+    copy {
+        from project(":geo-discovery-preload-dataset-plugin").buildDir.path.concat("/libs")
+        into pluginsDir
+    }
+}
+
+build {
+    dependsOn assemblePlugins
+}
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
@@ -116,6 +131,7 @@ dependencies {
     compile("org.mongodb.morphia:morphia:1.3.2")
 
     compile project(":geo-utils")
+    compile project(":geo-discovery-api")
 
     testCompile("junit:junit:4.12")
     testCompile("org.springframework.boot:spring-boot-starter-test")

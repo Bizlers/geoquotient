@@ -2,6 +2,7 @@ package com.bizlers.geoq.discovery.service;
 
 import com.bizlers.geoq.discovery.dao.ResourceDao;
 import com.bizlers.geoq.discovery.model.Resource;
+import com.bizlers.geoq.discovery.plugin.ResourceLocationUpdater;
 import com.bizlers.geoquotient.utils.GeoCalculator;
 import com.bizlers.geoquotient.utils.GeoLocation;
 import com.jcabi.aspects.Loggable;
@@ -18,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 @PropertySource("classpath:geo-discovery.properties")
-public class ResourceLocationRepository {
+public class ResourceLocationRepository implements ResourceLocationUpdater {
 
 	@Autowired
 	private EntityTileProvider entityTileProvider;
@@ -46,7 +47,7 @@ public class ResourceLocationRepository {
 	}
 
 	@Loggable(Loggable.TRACE)
-	void updateResource(Object id, GeoLocation geoLocation) {
+	public void updateResource(Object id, GeoLocation geoLocation) {
 		resourceLocations.put(id, geoLocation);
 	}
 
