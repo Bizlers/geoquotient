@@ -14,9 +14,9 @@ public class DatasetPreloader {
 	private GeoDiscoveryServiceInitializer serviceInitializer;
 
 	@Autowired
-	ResourceDao resourceDao;
+	private ResourceDao resourceDao;
 
-	public void preload(ResourceLocationRepository resourceLocationRepository) {
+	void preload(ResourceLocationRepository resourceLocationRepository) {
 		Collection<Resource> resources = resourceDao.findAll();
 		for (Resource res:resources) {
 			resourceLocationRepository.updateResource(res.getResourceId(), res.getGeoLocation());
