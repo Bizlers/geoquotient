@@ -22,7 +22,7 @@ public class JerseyConfig extends ResourceConfig {
 	@Autowired
 	public JerseyConfig(ObjectMapper objectMapper) {
 		// register endpoints
-		packages("com.bizlers.geoq.discovery.server.controller", "com.bizlers.auth.commons");
+		packages("com.bizlers.geoq.discovery.controller", "com.bizlers.auth.commons");
 		// register jackson for json
 		register(new ObjectMapperContextResolver(objectMapper));
 		register(MultiPartFeature.class);
