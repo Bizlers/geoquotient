@@ -23,8 +23,9 @@ public class ResourceController {
 	@PUT
 	@Path("/{resourceId}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateLocation(@PathParam("resourceId") String resourceId, GeoLocation geoLocation) {
+	public Response updateLocation(@PathParam("resourceId") String resourceId, GeoLocation geoLocation) {
 		updateDirector.updateLocation(resourceId, geoLocation);
+		return Response.ok("Location updated").build();
 	}
 
 	@GET
