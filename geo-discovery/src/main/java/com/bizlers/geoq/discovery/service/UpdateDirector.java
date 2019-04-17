@@ -31,7 +31,7 @@ public class UpdateDirector {
 		return resourceLocationRepository.getLocation(resourceId);
 	}
 
-	public void updateLocation(Object resourceId, GeoLocation newGeoLocation) {
+	public void updateLocation(String resourceId, GeoLocation newGeoLocation) {
 		Logger.debug(this, "Resource '%s' has updated location: %s", resourceId, newGeoLocation);
 		// Know the older geoLocation and old entity tile before we change
 		// the resource location
