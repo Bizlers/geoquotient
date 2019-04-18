@@ -1,7 +1,7 @@
 package com.bizlers.geoq.discovery.controller;
 
-import com.bizlers.geoq.discovery.model.Resource;
 import com.bizlers.geoq.discovery.service.UpdateDirector;
+import com.bizlers.geoq.models.Resource;
 import com.bizlers.geoquotient.utils.GeoLocation;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;

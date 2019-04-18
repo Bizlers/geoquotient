@@ -1,7 +1,7 @@
 package com.bizlers.geoq.discovery.service;
 
 import com.bizlers.geoq.discovery.dao.ResourceDao;
-import com.bizlers.geoq.discovery.model.Resource;
+import com.bizlers.geoq.models.Resource;
 import com.bizlers.geoquotient.utils.GeoLocation;
 import com.jcabi.log.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,9 +51,9 @@ public class UpdateDirector {
 
 		if (newGeoLocation == null) {
 			resourceLocationRepository.removeResource(resourceId);
-		} else {
+		} /*else {
 			return;
-		}
+		}*/
 
 		EntityTile oldEntityTile = entityTileProvider.getEntityTile(oldGeoLocation);
 		EntityTile activeEntityTile = entityTileProvider.getEntityTile(newGeoLocation);

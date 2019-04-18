@@ -132,6 +132,7 @@ dependencies {
 
     compile project(":geo-utils")
     compile project(":geo-discovery-api")
+    compile project(":geo-models")
 
     testCompile("junit:junit:4.12")
     testCompile("org.springframework.boot:spring-boot-starter-test")

@@ -1,6 +1,6 @@
 package com.bizlers.geoq.discovery.dao;
 
-import com.bizlers.geoq.discovery.model.Resource;
+import com.bizlers.geoq.models.Resource;
 import org.springframework.stereotype.Repository;
 
 @Repository

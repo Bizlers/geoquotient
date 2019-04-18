@@ -4,4 +4,5 @@ include 'website'
 include 'geo-utils'
 include 'geo-discovery-api'
 include 'geo-discovery-preload-dataset-plugin'
+include 'geo-models'
 

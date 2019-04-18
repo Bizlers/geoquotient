@@ -1,4 +1,4 @@
-package com.bizlers.geoq.discovery.model;
+package com.bizlers.geoq.models;
 
 import com.bizlers.geoquotient.utils.GeoLocation;
 import io.swagger.annotations.ApiModel;

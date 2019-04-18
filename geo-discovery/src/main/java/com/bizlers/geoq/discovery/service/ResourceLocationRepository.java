@@ -1,8 +1,8 @@
 package com.bizlers.geoq.discovery.service;
 
 import com.bizlers.geoq.discovery.dao.ResourceDao;
-import com.bizlers.geoq.discovery.model.Resource;
 import com.bizlers.geoq.discovery.plugin.ResourceLocationUpdater;
+import com.bizlers.geoq.models.Resource;
 import com.bizlers.geoquotient.utils.GeoCalculator;
 import com.bizlers.geoquotient.utils.GeoLocation;
 import com.jcabi.aspects.Loggable;
