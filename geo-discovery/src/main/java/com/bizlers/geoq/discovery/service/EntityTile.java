@@ -60,6 +60,6 @@ public class EntityTile extends Tile {
 
 	@Loggable(Loggable.TRACE)
 	public void resourceMoves(Object resourceId) {
-		Logger.debug(this, "Resource %d moves in %s tile", resourceId, this);
+		Logger.debug(this, "Resource %s moves in %s tile", resourceId, this);
 	}
 }
