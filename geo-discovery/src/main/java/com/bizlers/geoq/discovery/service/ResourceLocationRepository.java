@@ -26,8 +26,8 @@ public class ResourceLocationRepository {
 	@Autowired
 	private ResourceDao resourceDao;
 
-	@Value("${line_of_sight}")
-	private int lineOfSight;
+	@Value("${search_radius}")
+	private int searchRadius;
 
 	@Value("${accuracy_limiting_factor}")
 	private float accuracyLimitingFactor;
@@ -115,11 +115,11 @@ public class ResourceLocationRepository {
 		if (dstLocation != null) {
 			int srcAccuracy = (int) (srcLocation.getAccuracy() * accuracyLimitingFactor);
 			int dstAccuracy = (int) (dstLocation.getAccuracy() * accuracyLimitingFactor);
-			int searchRadius = Math.min((lineOfSight + srcAccuracy), maxSearchRadius);
+			int searchRadius = Math.min((this.searchRadius + srcAccuracy), maxSearchRadius);
 			int distance = (int) GeoCalculator.distanceInMetersFrom(
 					srcLocation, dstLocation, GeoCalculator.ACCURACY_LOW);
-			if (distance < lineOfSight) {
-				if (srcAccuracy + dstAccuracy + distance < lineOfSight) {
+			if (distance < this.searchRadius) {
+				if (srcAccuracy + dstAccuracy + distance < this.searchRadius) {
 					return Visibility.VISIBILITY_HIGH;
 				} else {
 					return Visibility.VISIBILITY_LOW;
@@ -143,7 +143,7 @@ public class ResourceLocationRepository {
 	private boolean locationsNearby(GeoLocation srcLocation, GeoLocation targetLocation) {
 		if (srcLocation != null && targetLocation != null) {
 			int distance = (int) GeoCalculator.distanceInMetersFrom(srcLocation, targetLocation, GeoCalculator.ACCURACY_LOW);
-			return distance <= lineOfSight;
+			return distance <= searchRadius;
 		}
 		return false;
 	}

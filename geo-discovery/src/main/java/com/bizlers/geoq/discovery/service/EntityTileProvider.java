@@ -57,15 +57,15 @@ public class EntityTileProvider {
 
 	private TileRegistry tileRegistry = new TileRegistry();
 
-	@Value("${zoom_level}")
-	private int zoomLevel;
+	@Value("${tilingDepth}")
+	private int tilingDepth;
 
 	@Loggable(Loggable.TRACE)
 	public EntityTile getEntityTile(GeoLocation geoLocation) {
 		if (geoLocation == null) {
 			return null;
 		}
-		GeoProjection projection = new GeoProjection(zoomLevel);
+		GeoProjection projection = new GeoProjection(tilingDepth);
 		Point tileXY = projection
 				.getTileXY(new GeoLocation(geoLocation
 						.getLatitude(), geoLocation.getLongitude(), geoLocation
