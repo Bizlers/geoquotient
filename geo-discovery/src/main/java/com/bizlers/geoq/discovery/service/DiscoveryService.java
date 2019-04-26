@@ -16,7 +16,7 @@ import java.util.Set;
  * 
  */
 @Service
-public class UpdateDirector {
+public class DiscoveryService {
 
 	@Autowired
 	private ResourceLocationRepository resourceLocationRepository;

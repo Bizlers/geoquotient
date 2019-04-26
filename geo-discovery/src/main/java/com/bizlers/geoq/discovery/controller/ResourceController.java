@@ -1,6 +1,6 @@
 package com.bizlers.geoq.discovery.controller;
 
-import com.bizlers.geoq.discovery.service.UpdateDirector;
+import com.bizlers.geoq.discovery.service.DiscoveryService;
 import com.bizlers.geoq.models.Resource;
 import com.bizlers.geoquotient.utils.GeoLocation;
 import io.swagger.annotations.Api;
@@ -18,13 +18,13 @@ import java.util.Set;
 public class ResourceController {
 
 	@Autowired
-	private UpdateDirector updateDirector;
+	private DiscoveryService discoveryService;
 
 	@PUT
 	@Path("/{resourceId}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateLocation(@PathParam("resourceId") String resourceId, GeoLocation geoLocation) {
-		updateDirector.updateLocation(resourceId, geoLocation);
+		discoveryService.updateLocation(resourceId, geoLocation);
 		return Response.ok("Location updated").build();
 	}
 
@@ -32,14 +32,14 @@ public class ResourceController {
 	@Path("/{resourceId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getLocation(@PathParam("resourceId") String resourceId) {
-		GeoLocation geoLocation = updateDirector.getLocation(resourceId);
+		GeoLocation geoLocation = discoveryService.getLocation(resourceId);
 		return Response.ok(geoLocation).build();
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getNearby(@QueryParam("latitude") double latitude, @QueryParam("longitude") double longitude, @QueryParam("radius") int radius) {
-		Set<Resource> resources = updateDirector.getNearby(latitude, longitude, radius);
+		Set<Resource> resources = discoveryService.getNearby(latitude, longitude, radius);
 		return Response.ok(resources).build();
 	}
 }
