@@ -1,9 +1,9 @@
 package com.bizlers.geoq.discovery;
 
 import com.bizlers.geoq.discovery.dao.ResourceDao;
+import com.bizlers.geoq.discovery.service.DiscoveryService;
 import com.bizlers.geoq.models.Resource;
 import com.bizlers.geoq.discovery.plugin.GeoDiscoveryServiceInitializer;
-import com.bizlers.geoq.discovery.service.ResourceLocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collection;
@@ -16,12 +16,12 @@ public class DatasetPreloader {
 	@Autowired
 	private ResourceDao resourceDao;
 
-	void preload(ResourceLocationRepository resourceLocationRepository) {
+	void preload(DiscoveryService discoveryService) {
 		Collection<Resource> resources = resourceDao.findAll();
 		for (Resource res:resources) {
-			resourceLocationRepository.updateResource(res.getResourceId(), res.getGeoLocation());
+			discoveryService.updateResource(res.getResourceId(), res.getGeoLocation());
 		}
-		serviceInitializer.initialize(resourceLocationRepository);
+		serviceInitializer.initialize(discoveryService);
 	}
 
 }

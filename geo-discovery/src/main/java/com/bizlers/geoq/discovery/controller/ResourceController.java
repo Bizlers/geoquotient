@@ -24,7 +24,7 @@ public class ResourceController {
 	@Path("/{resourceId}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateLocation(@PathParam("resourceId") String resourceId, GeoLocation geoLocation) {
-		discoveryService.updateLocation(resourceId, geoLocation);
+		discoveryService.updateResource(resourceId, geoLocation);
 		return Response.ok("Location updated").build();
 	}
 

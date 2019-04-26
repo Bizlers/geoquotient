@@ -1,6 +1,7 @@
 package com.bizlers.geoq.discovery.service;
 
 import com.bizlers.geoq.discovery.dao.ResourceDao;
+import com.bizlers.geoq.discovery.plugin.ResourceLocationUpdater;
 import com.bizlers.geoq.models.Resource;
 import com.bizlers.geoquotient.utils.GeoLocation;
 import com.jcabi.log.Logger;
@@ -16,7 +17,7 @@ import java.util.Set;
  * 
  */
 @Service
-public class DiscoveryService {
+public class DiscoveryService implements ResourceLocationUpdater {
 
 	@Autowired
 	private ResourceLocationRepository resourceLocationRepository;
@@ -31,7 +32,7 @@ public class DiscoveryService {
 		return resourceLocationRepository.getLocation(resourceId);
 	}
 
-	public void updateLocation(String resourceId, GeoLocation newGeoLocation) {
+	public void updateResource(String resourceId, GeoLocation newGeoLocation) {
 		Logger.debug(this, "Resource '%s' has updated location: %s", resourceId, newGeoLocation);
 		// Know the older geoLocation and old entity tile before we change
 		// the resource location

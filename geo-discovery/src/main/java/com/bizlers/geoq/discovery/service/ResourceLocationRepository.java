@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 @PropertySource("classpath:geo-discovery.properties")
-public class ResourceLocationRepository implements ResourceLocationUpdater {
+public class ResourceLocationRepository {
 
 	@Autowired
 	private EntityTileProvider entityTileProvider;
