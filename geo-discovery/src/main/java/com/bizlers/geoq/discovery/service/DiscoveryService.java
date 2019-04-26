@@ -52,9 +52,9 @@ public class DiscoveryService implements ResourceLocationUpdater {
 
 		if (newGeoLocation == null) {
 			resourceLocationRepository.removeResource(resourceId);
-		} /*else {
-			return;
-		}*/
+		} else {
+			resourceLocationRepository.updateResource(resourceId, newGeoLocation);
+		}
 
 		EntityTile oldEntityTile = entityTileProvider.getEntityTile(oldGeoLocation);
 		EntityTile activeEntityTile = entityTileProvider.getEntityTile(newGeoLocation);
