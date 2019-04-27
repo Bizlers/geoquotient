@@ -57,7 +57,7 @@ public class EntityTileProvider {
 
 	private TileRegistry tileRegistry = new TileRegistry();
 
-	@Value("${tilingDepth}")
+	@Value("${tiling_depth}")
 	private int tilingDepth;
 
 	@Loggable(Loggable.TRACE)
