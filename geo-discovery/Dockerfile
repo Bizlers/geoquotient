@@ -3,7 +3,6 @@ ARG version
 
 RUN mkdir -p /opt/lib/geoq
 COPY ./build/distributions/geo-discovery-server-$version.tar /opt/lib/geoq
-COPY ./build/distributions/entrypoint.sh /opt/lib/geoq
 
 RUN tar -xf /opt/lib/geoq/geo-discovery-server-$version.tar -C /opt/lib/geoq/ \
 && mv /opt/lib/geoq/geo-discovery-server-$version /opt/lib/geoq/geo-discovery-server/ \
