@@ -18,9 +18,6 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'checkstyle'
 
-group 'com.bizlers.geoquotient'
-version '1.0-SNAPSHOT'
-
 sourceCompatibility = 1.8
 
 repositories {
