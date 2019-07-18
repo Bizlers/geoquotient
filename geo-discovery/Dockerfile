@@ -11,4 +11,4 @@ RUN tar -xf /opt/lib/geoq/geo-discovery-server-$version.tar -C /opt/lib/geoq/ \
 
 EXPOSE 12822
 
-ENTRYPOINT /opt/lib/geoq/geo-discovery-server/geo-discovery
+ENTRYPOINT /opt/lib/geoq/geo-discovery-server/bin/geo-discovery
