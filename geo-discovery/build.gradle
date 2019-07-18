@@ -105,6 +105,7 @@ build {
 
 distributions {
     main {
+        baseName = 'geo-discovery-server'
         contents {
             into("lib/conf") {
                 exclude 'plugins/'
