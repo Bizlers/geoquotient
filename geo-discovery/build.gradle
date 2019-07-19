@@ -121,6 +121,14 @@ distributions {
             }
         }
     }
+
+    doLast {
+        copy {
+            println "Copying installation script"
+            from "entrypoint.sh"
+            into "$buildDir/distributions"
+        }
+    }
 }
 
 dependencies {
