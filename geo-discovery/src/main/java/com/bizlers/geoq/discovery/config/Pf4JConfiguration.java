@@ -14,6 +14,7 @@ import org.springframework.core.io.ResourceLoader;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 @Configuration
 @PropertySource("classpath:application.properties")
@@ -28,7 +29,7 @@ public class Pf4JConfiguration {
 	private String pluginsDir;
 
 	@Bean
-	public SpringPluginManager pluginManager() throws IOException {
+	public SpringPluginManager pluginManager() throws IOException, URISyntaxException {
 		File pluginsRoot;
 		if (pluginsDir != null) {
 			pluginsRoot = new File(pluginsDir);
@@ -39,7 +40,16 @@ public class Pf4JConfiguration {
 				pluginsRoot = resource.getFile();
 				Logger.debug(this, "Using pluginRoot from classpath");
 			} else {
-				File exeRoot = new File(System.getProperty("user.dir")).getParentFile();
+				String userDir = System.getProperty("user.dir");
+				Logger.debug(this, "user.dir = %s", userDir);
+				File exeRoot = new File(userDir).getParentFile();
+				if (exeRoot == null || !exeRoot.exists()) {
+					// Since user.dir doesn't work in docker environment
+					String jarPath = new File(getClass().getProtectionDomain().getCodeSource().getLocation()
+							.toURI()).getPath();
+					Logger.debug(this, "Using runnable jar path: %s", jarPath);
+					exeRoot = new File(jarPath).getParentFile().getParentFile();
+				}
 				pluginsRoot = new File(exeRoot + SEP + "lib" + SEP + "plugins");
 				Logger.debug(this, "Using pluginRoot from: %s", pluginsRoot);
 			}
