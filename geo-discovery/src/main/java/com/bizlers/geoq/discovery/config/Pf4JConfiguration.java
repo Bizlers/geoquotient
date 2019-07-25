@@ -40,16 +40,11 @@ public class Pf4JConfiguration {
 				pluginsRoot = resource.getFile();
 				Logger.debug(this, "Using pluginRoot from classpath");
 			} else {
-				String userDir = System.getProperty("user.dir");
-				Logger.debug(this, "user.dir = %s", userDir);
-				File exeRoot = new File(userDir).getParentFile();
-				if (exeRoot == null || !exeRoot.exists()) {
-					// Since user.dir doesn't work in docker environment
-					String jarPath = new File(getClass().getProtectionDomain().getCodeSource().getLocation()
-							.toURI()).getPath();
-					Logger.debug(this, "Using runnable jar path: %s", jarPath);
-					exeRoot = new File(jarPath).getParentFile().getParentFile();
-				}
+				// Since user.dir doesn't work in docker environment
+				String jarPath = new File(getClass().getProtectionDomain().getCodeSource().getLocation()
+						.toURI()).getPath();
+				Logger.debug(this, "Using runnable jar path: %s", jarPath);
+				File exeRoot = new File(jarPath).getParentFile().getParentFile();
 				pluginsRoot = new File(exeRoot + SEP + "lib" + SEP + "plugins");
 				Logger.debug(this, "Using pluginRoot from: %s", pluginsRoot);
 			}
