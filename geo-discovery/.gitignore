@@ -2,3 +2,4 @@ src/main/resources/plugins/
 build/
 .gradle/
 out/
+/.idea/
