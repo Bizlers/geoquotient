@@ -4,23 +4,25 @@ import java.time.ZoneId
 
 buildscript {
     ext {
-        springBootVersion = '2.1.6.RELEASE'
-        springCloudVersion = "Greenwich.SR1"
+        springBootVersion = '2.7.14'
+        springCloudVersion = "2021.0.8"
     }
     repositories {
         mavenCentral()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath 'io.spring.gradle:dependency-management-plugin:1.1.2'
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'application'
-apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'checkstyle'
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version '1.1.2'
+    id 'checkstyle'
+}
 
 sourceCompatibility = 1.8
 
@@ -52,8 +54,6 @@ println "Plugins directory: " + pluginsDir
 
 jar {
     enabled = true
-    classifier = 'boot'
-    baseName = 'geo-discovery-server'
     version =  project.version
 
     exclude '**/*.properties'
@@ -109,7 +109,6 @@ build {
 
 distributions {
     main {
-        baseName = 'geo-discovery-server'
         contents {
             into("lib/conf") {
                 exclude 'plugins/'
@@ -132,43 +131,43 @@ distributions {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
 
-    compile("com.jcabi:jcabi-log:0.17.2")
-    compileOnly("org.projectlombok:lombok:1.18.6")
+    implementation("com.jcabi:jcabi-log:0.17.2")
+    implementation("org.projectlombok:lombok:1.18.6")
     annotationProcessor("org.projectlombok:lombok:1.18.6")
 
     // to make it work with java11
-    compile("javax.xml.bind:jaxb-api:2.2.11")
-    compile("com.sun.xml.bind:jaxb-core:2.2.11")
-    compile("com.sun.xml.bind:jaxb-impl:2.2.11")
-    compile("javax.activation:activation:1.1.1")
+    implementation("javax.xml.bind:jaxb-api:2.2.11")
+    implementation("com.sun.xml.bind:jaxb-core:2.2.11")
+    implementation("com.sun.xml.bind:jaxb-impl:2.2.11")
+    implementation("javax.activation:activation:1.1.1")
 
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-starter-jersey")
-    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-    compile("org.springframework.cloud:spring-cloud-starter-config")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-jersey")
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("org.springframework.cloud:spring-cloud-starter-config")
 
-    compile("org.pf4j:pf4j-spring:0.5.0") {
+    implementation("org.pf4j:pf4j-spring:0.5.0") {
         exclude module: "slf4j-log4j12"
     }
 
-    compile("com.hazelcast:hazelcast:3.9.2")
-    compile("com.hazelcast:hazelcast-client:3.9.2")
+    implementation("com.hazelcast:hazelcast:3.9.2")
+    implementation("com.hazelcast:hazelcast-client:3.9.2")
 
-    compile("org.apache.tomcat.embed:tomcat-embed-jasper:8.0.47")
-    compile("javax.servlet:jstl:1.2")
+    implementation("org.apache.tomcat.embed:tomcat-embed-jasper:8.0.47")
+    implementation("javax.servlet:jstl:1.2")
 
-    compile 'io.swagger:swagger-jersey2-jaxrs:1.5.22'
+    implementation 'io.swagger:swagger-jersey2-jaxrs:1.5.22'
 
-    compile("org.mongodb.morphia:morphia:1.3.2")
+    implementation("org.mongodb.morphia:morphia:1.3.2")
 
-    compile project(":geo-utils")
-    compile project(":geo-discovery-api")
-    compile project(":geo-models")
+    implementation project(":geo-utils")
+    implementation project(":geo-discovery-api")
+    implementation project(":geo-models")
 
-    testCompile("junit:junit:4.12")
-    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("junit:junit:4.12")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 dependencyManagement {

@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN npm install express --only=production
+RUN npm install express
 RUN npm install swagger-ui-express
 RUN npm install serve-static
 # If you are building your code for production
